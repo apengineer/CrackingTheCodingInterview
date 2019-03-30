@@ -3,8 +3,14 @@ package stacksAndQueues;
 //LIFO
 public class MyStack {
 
-	Node head;
+	public Node head;
 	
+	public boolean isEmpty() {
+		if(head == null) return true;
+		else return false;
+	}
+	
+	// not so good implementation. Can implement with O(1), by moving head to currently added el.
 	// add to tail
 	public void push(int d) {
 		
@@ -23,6 +29,11 @@ public class MyStack {
 	// remove last node
 	public Node pop(){
 		Node n = head;
+		if(n.next == null) {			
+			head.next = null;
+			head = null;
+			return n;
+		}
 		Node secondLastNode = null;
 		while (n.next != null) {
 			secondLastNode = n;
@@ -30,10 +41,12 @@ public class MyStack {
 		}
 		Node lastNode = n;
 		secondLastNode.next = null;
+			
 		return lastNode;		
 	}
 	
 	public void show() {
+		if(head == null) return;
 		Node n = head;
 		while(n.next != null) {
 			System.out.println(n.data);
@@ -41,5 +54,7 @@ public class MyStack {
 		}
 		System.out.println(n.data);
 	}
+	
+	
 	
 }

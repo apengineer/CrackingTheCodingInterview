@@ -13,6 +13,8 @@ public class MyStackTester {
 		myStack.show();
 		System.out.println("Pop");
 		System.out.println(myStack.pop().data);
+		System.out.println(myStack.pop().data);
+		System.out.println(myStack.pop().data);
 		System.out.println("After pop");
 		myStack.show();
 	}
