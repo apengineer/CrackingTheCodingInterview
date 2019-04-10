@@ -7,21 +7,23 @@ public class GraphTester {
 	}
 
 	public static void main(String[] args) {
-		Graph graph = new Graph(6);
+		Graph graph = new Graph(4);
 		Edge edge01 = new Edge(0, 1, 6);
-		Edge edge14 = new Edge(1, 4, 1);
+		Edge edge13 = new Edge(1, 3, 1);
 		Edge edge02 = new Edge(0, 2, 5);
 		Edge edge23 = new Edge(2, 3, 3);
 		
 		graph.addEdge(edge01);
-		graph.addEdge(edge14);
+		graph.addEdge(edge13);
 		graph.addEdge(edge02);
-		graph.addEdge(edge23);
+		graph.addEdge(edge23); // creates the cycle
 		
-		graph.printGraphWithWeights();
+		
 		
 		graph.BFS(0);
+		System.out.println();
 		
+		System.out.println(graph.isCyclic(0));
 		
 		
 		
