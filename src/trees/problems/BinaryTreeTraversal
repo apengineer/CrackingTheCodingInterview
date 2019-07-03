@@ -1,0 +1,124 @@
+package trees;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+public class BinaryTreeTraversal {
+	
+	
+	class Node {
+		Node left;
+		Node right;
+		int data;
+		
+		Node(int x) {
+			this.data = x;
+			right= left = null;
+		}
+	}
+
+	Node root;
+	
+	
+	public int depthIterative(Node root) {
+		Queue<Node> q = new LinkedList<>();
+		
+		q.add(root);
+		int height = 0;
+		int nodeCount = 0;
+		while(!q.isEmpty()) {			
+			nodeCount = q.size();			
+			height++;			
+			while(nodeCount > 0) {
+				Node tmp = q.poll();
+				nodeCount--;
+				if(tmp.left != null) q.add(tmp.left);
+				if(tmp.right != null) q.add(tmp.right);				
+			}
+						
+		}
+		return height;
+		
+	}
+	
+	
+	public int depth(Node root) {
+		if(root == null) return 0;
+		else {
+			int l = depth(root.left);
+			int r = depth(root.right);
+			
+			return Math.max(l, r) + 1 ;
+		}
+	}
+	
+	public void DFSPreOrderTraversal(Node node) {
+	
+		// root -- left -- right
+		if(node == null) return;
+		
+		System.out.print(node.data + " ");
+		
+		DFSPreOrderTraversal(node.left);
+		DFSPreOrderTraversal(node.right);
+		
+		
+	}
+	
+	// DFS using stack
+	public void DFSInOrderTraversalWithoutRecursion(Node node) {
+		Stack<Node> stack = new Stack<>();
+		Node cur = node;		
+		while(cur != null || stack.size() != 0) {			
+			while(cur != null) {
+				stack.push(cur);
+				cur = cur.left;
+			}
+			cur = stack.pop();			
+			System.out.print(cur.data + " ");
+			cur = cur.right;
+		}
+		
+	}
+	
+	public void DFSInOrderTraversal(Node node) {
+		
+		//  left--  root -- right
+		if(node == null) return;
+		
+	
+		DFSInOrderTraversal(node.left);
+		
+		System.out.print(node.data + " ");
+		
+		DFSInOrderTraversal(node.right);
+		
+		
+	}
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		BinaryTreeTraversal bt = new BinaryTreeTraversal();
+		bt.root = bt.new Node(10);
+		
+		bt.root.left = bt.new Node(1);
+		bt.root.right = bt.new Node(2);
+		bt.root.left.left = bt.new Node(3);
+		bt.root.left.right = bt.new Node(4);
+		
+		
+		bt.DFSInOrderTraversal(bt.root);
+		System.out.println("Without recursion");
+		bt.DFSInOrderTraversalWithoutRecursion(bt.root);
+		/*System.out.println();
+		bt.DFSPreOrderTraversal(bt.root);
+		
+		System.out.println();
+		System.out.println(bt.depth(bt.root));
+		System.out.println(bt.depthIterative(bt.root));*/
+	}
+
+}
